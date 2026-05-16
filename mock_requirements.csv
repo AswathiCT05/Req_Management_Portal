@@ -1,0 +1,121 @@
+title,description,status
+SIM-0001 Headlamp bracket - static load,"max stress 89 MPa, max displacement 0.83 mm, safety factor 1.41, mesh elements 46731, result review required.",open
+SIM-0002 Battery housing - modal analysis,"max stress 96 MPa, max displacement 1.48 mm, safety factor 1.77, mesh elements 48462, result review required.",processed
+SIM-0003 Bumper beam - thermal expansion,"max stress 103 MPa, max displacement 2.13 mm, safety factor 2.13, mesh elements 50193, result within target.",obsolete
+SIM-0004 Door hinge - vibration fatigue,"max stress 110 MPa, max displacement 2.78 mm, safety factor 2.49, mesh elements 51924, result within target.",open
+SIM-0005 Seat rail - impact load,"max stress 117 MPa, max displacement 3.43 mm, safety factor 2.85, mesh elements 53655, result within target.",processed
+SIM-0006 Control unit cover - mounting preload,"max stress 124 MPa, max displacement 4.08 mm, safety factor 3.21, mesh elements 55386, result within target.",obsolete
+SIM-0007 Cooling fan frame - random vibration,"max stress 131 MPa, max displacement 4.73 mm, safety factor 3.57, mesh elements 57117, result within target.",open
+SIM-0008 Dashboard carrier - thermal cycling,"max stress 138 MPa, max displacement 0.63 mm, safety factor 3.93, mesh elements 58848, result within target.",processed
+SIM-0009 Sensor mount - torsional load,"max stress 145 MPa, max displacement 1.28 mm, safety factor 4.29, mesh elements 60579, result within target.",obsolete
+SIM-0010 Lamp module housing - drop test,"max stress 152 MPa, max displacement 1.93 mm, safety factor 1.25, mesh elements 62310, result review required.",open
+SIM-0011 Mirror support - static load,"max stress 159 MPa, max displacement 2.58 mm, safety factor 1.61, mesh elements 64041, result review required.",processed
+SIM-0012 Cable guide - modal analysis,"max stress 166 MPa, max displacement 3.23 mm, safety factor 1.97, mesh elements 65772, result review required.",obsolete
+SIM-0013 Thermal shield - thermal expansion,"max stress 173 MPa, max displacement 3.88 mm, safety factor 2.33, mesh elements 67503, result within target.",open
+SIM-0014 Pedal bracket - vibration fatigue,"max stress 180 MPa, max displacement 4.53 mm, safety factor 2.69, mesh elements 69234, result within target.",processed
+SIM-0015 Connector holder - impact load,"max stress 187 MPa, max displacement 0.43 mm, safety factor 3.05, mesh elements 70965, result within target.",obsolete
+SIM-0016 Headlamp bracket - mounting preload,"max stress 194 MPa, max displacement 1.08 mm, safety factor 3.41, mesh elements 72696, result within target.",open
+SIM-0017 Battery housing - random vibration,"max stress 201 MPa, max displacement 1.73 mm, safety factor 3.77, mesh elements 74427, result within target.",processed
+SIM-0018 Bumper beam - thermal cycling,"max stress 208 MPa, max displacement 2.38 mm, safety factor 4.13, mesh elements 76158, result within target.",obsolete
+SIM-0019 Door hinge - torsional load,"max stress 215 MPa, max displacement 3.03 mm, safety factor 1.09, mesh elements 77889, result review required.",open
+SIM-0020 Seat rail - drop test,"max stress 222 MPa, max displacement 3.68 mm, safety factor 1.45, mesh elements 79620, result review required.",processed
+SIM-0021 Control unit cover - static load,"max stress 229 MPa, max displacement 4.33 mm, safety factor 1.81, mesh elements 81351, result review required.",obsolete
+SIM-0022 Cooling fan frame - modal analysis,"max stress 236 MPa, max displacement 0.23 mm, safety factor 2.17, mesh elements 83082, result review required.",open
+SIM-0023 Dashboard carrier - thermal expansion,"max stress 243 MPa, max displacement 0.88 mm, safety factor 2.53, mesh elements 84813, result review required.",processed
+SIM-0024 Sensor mount - vibration fatigue,"max stress 85 MPa, max displacement 1.53 mm, safety factor 2.89, mesh elements 86544, result within target.",obsolete
+SIM-0025 Lamp module housing - impact load,"max stress 92 MPa, max displacement 2.18 mm, safety factor 3.25, mesh elements 88275, result within target.",open
+SIM-0026 Mirror support - mounting preload,"max stress 99 MPa, max displacement 2.83 mm, safety factor 3.61, mesh elements 90006, result within target.",processed
+SIM-0027 Cable guide - random vibration,"max stress 106 MPa, max displacement 3.48 mm, safety factor 3.97, mesh elements 91737, result within target.",obsolete
+SIM-0028 Thermal shield - thermal cycling,"max stress 113 MPa, max displacement 4.13 mm, safety factor 4.33, mesh elements 93468, result within target.",open
+SIM-0029 Pedal bracket - torsional load,"max stress 120 MPa, max displacement 4.78 mm, safety factor 1.29, mesh elements 95199, result review required.",processed
+SIM-0030 Connector holder - drop test,"max stress 127 MPa, max displacement 0.68 mm, safety factor 1.65, mesh elements 96930, result review required.",obsolete
+SIM-0031 Headlamp bracket - static load,"max stress 134 MPa, max displacement 1.33 mm, safety factor 2.01, mesh elements 98661, result within target.",open
+SIM-0032 Battery housing - modal analysis,"max stress 141 MPa, max displacement 1.98 mm, safety factor 2.37, mesh elements 100392, result within target.",processed
+SIM-0033 Bumper beam - thermal expansion,"max stress 148 MPa, max displacement 2.63 mm, safety factor 2.73, mesh elements 102123, result within target.",obsolete
+SIM-0034 Door hinge - vibration fatigue,"max stress 155 MPa, max displacement 3.28 mm, safety factor 3.09, mesh elements 103854, result within target.",open
+SIM-0035 Seat rail - impact load,"max stress 162 MPa, max displacement 3.93 mm, safety factor 3.45, mesh elements 105585, result within target.",processed
+SIM-0036 Control unit cover - mounting preload,"max stress 169 MPa, max displacement 4.58 mm, safety factor 3.81, mesh elements 107316, result within target.",obsolete
+SIM-0037 Cooling fan frame - random vibration,"max stress 176 MPa, max displacement 0.48 mm, safety factor 4.17, mesh elements 109047, result within target.",open
+SIM-0038 Dashboard carrier - thermal cycling,"max stress 183 MPa, max displacement 1.13 mm, safety factor 1.13, mesh elements 110778, result review required.",processed
+SIM-0039 Sensor mount - torsional load,"max stress 190 MPa, max displacement 1.78 mm, safety factor 1.49, mesh elements 112509, result review required.",obsolete
+SIM-0040 Lamp module housing - drop test,"max stress 197 MPa, max displacement 2.43 mm, safety factor 1.85, mesh elements 114240, result review required.",open
+SIM-0041 Mirror support - static load,"max stress 204 MPa, max displacement 3.08 mm, safety factor 2.21, mesh elements 115971, result within target.",processed
+SIM-0042 Cable guide - modal analysis,"max stress 211 MPa, max displacement 3.73 mm, safety factor 2.57, mesh elements 117702, result review required.",obsolete
+SIM-0043 Thermal shield - thermal expansion,"max stress 218 MPa, max displacement 4.38 mm, safety factor 2.93, mesh elements 119433, result review required.",open
+SIM-0044 Pedal bracket - vibration fatigue,"max stress 225 MPa, max displacement 0.28 mm, safety factor 3.29, mesh elements 121164, result review required.",processed
+SIM-0045 Connector holder - impact load,"max stress 232 MPa, max displacement 0.93 mm, safety factor 3.65, mesh elements 122895, result review required.",obsolete
+SIM-0046 Headlamp bracket - mounting preload,"max stress 239 MPa, max displacement 1.58 mm, safety factor 4.01, mesh elements 124626, result review required.",open
+SIM-0047 Battery housing - random vibration,"max stress 246 MPa, max displacement 2.23 mm, safety factor 4.37, mesh elements 126357, result review required.",processed
+SIM-0048 Bumper beam - thermal cycling,"max stress 88 MPa, max displacement 2.88 mm, safety factor 1.33, mesh elements 128088, result review required.",obsolete
+SIM-0049 Door hinge - torsional load,"max stress 95 MPa, max displacement 3.53 mm, safety factor 1.69, mesh elements 129819, result review required.",open
+SIM-0050 Seat rail - drop test,"max stress 102 MPa, max displacement 4.18 mm, safety factor 2.05, mesh elements 131550, result within target.",processed
+SIM-0051 Control unit cover - static load,"max stress 109 MPa, max displacement 4.83 mm, safety factor 2.41, mesh elements 133281, result within target.",obsolete
+SIM-0052 Cooling fan frame - modal analysis,"max stress 116 MPa, max displacement 0.73 mm, safety factor 2.77, mesh elements 135012, result within target.",open
+SIM-0053 Dashboard carrier - thermal expansion,"max stress 123 MPa, max displacement 1.38 mm, safety factor 3.13, mesh elements 136743, result within target.",processed
+SIM-0054 Sensor mount - vibration fatigue,"max stress 130 MPa, max displacement 2.03 mm, safety factor 3.49, mesh elements 138474, result within target.",obsolete
+SIM-0055 Lamp module housing - impact load,"max stress 137 MPa, max displacement 2.68 mm, safety factor 3.85, mesh elements 140205, result within target.",open
+SIM-0056 Mirror support - mounting preload,"max stress 144 MPa, max displacement 3.33 mm, safety factor 4.21, mesh elements 141936, result within target.",processed
+SIM-0057 Cable guide - random vibration,"max stress 151 MPa, max displacement 3.98 mm, safety factor 1.17, mesh elements 143667, result review required.",obsolete
+SIM-0058 Thermal shield - thermal cycling,"max stress 158 MPa, max displacement 4.63 mm, safety factor 1.53, mesh elements 145398, result review required.",open
+SIM-0059 Pedal bracket - torsional load,"max stress 165 MPa, max displacement 0.53 mm, safety factor 1.89, mesh elements 147129, result review required.",processed
+SIM-0060 Connector holder - drop test,"max stress 172 MPa, max displacement 1.18 mm, safety factor 2.25, mesh elements 148860, result within target.",obsolete
+SIM-0061 Headlamp bracket - static load,"max stress 179 MPa, max displacement 1.83 mm, safety factor 2.61, mesh elements 150591, result within target.",open
+SIM-0062 Battery housing - modal analysis,"max stress 186 MPa, max displacement 2.48 mm, safety factor 2.97, mesh elements 152322, result within target.",processed
+SIM-0063 Bumper beam - thermal expansion,"max stress 193 MPa, max displacement 3.13 mm, safety factor 3.33, mesh elements 154053, result within target.",obsolete
+SIM-0064 Door hinge - vibration fatigue,"max stress 200 MPa, max displacement 3.78 mm, safety factor 3.69, mesh elements 155784, result within target.",open
+SIM-0065 Seat rail - impact load,"max stress 207 MPa, max displacement 4.43 mm, safety factor 4.05, mesh elements 157515, result within target.",processed
+SIM-0066 Control unit cover - mounting preload,"max stress 214 MPa, max displacement 0.33 mm, safety factor 4.41, mesh elements 159246, result review required.",obsolete
+SIM-0067 Cooling fan frame - random vibration,"max stress 221 MPa, max displacement 0.98 mm, safety factor 1.37, mesh elements 160977, result review required.",open
+SIM-0068 Dashboard carrier - thermal cycling,"max stress 228 MPa, max displacement 1.63 mm, safety factor 1.73, mesh elements 162708, result review required.",processed
+SIM-0069 Sensor mount - torsional load,"max stress 235 MPa, max displacement 2.28 mm, safety factor 2.09, mesh elements 164439, result review required.",obsolete
+SIM-0070 Lamp module housing - drop test,"max stress 242 MPa, max displacement 2.93 mm, safety factor 2.45, mesh elements 166170, result review required.",open
+SIM-0071 Mirror support - static load,"max stress 84 MPa, max displacement 3.58 mm, safety factor 2.81, mesh elements 167901, result within target.",processed
+SIM-0072 Cable guide - modal analysis,"max stress 91 MPa, max displacement 4.23 mm, safety factor 3.17, mesh elements 169632, result within target.",obsolete
+SIM-0073 Thermal shield - thermal expansion,"max stress 98 MPa, max displacement 4.88 mm, safety factor 3.53, mesh elements 171363, result within target.",open
+SIM-0074 Pedal bracket - vibration fatigue,"max stress 105 MPa, max displacement 0.78 mm, safety factor 3.89, mesh elements 173094, result within target.",processed
+SIM-0075 Connector holder - impact load,"max stress 112 MPa, max displacement 1.43 mm, safety factor 4.25, mesh elements 174825, result within target.",obsolete
+SIM-0076 Headlamp bracket - mounting preload,"max stress 119 MPa, max displacement 2.08 mm, safety factor 1.21, mesh elements 176556, result review required.",open
+SIM-0077 Battery housing - random vibration,"max stress 126 MPa, max displacement 2.73 mm, safety factor 1.57, mesh elements 178287, result review required.",processed
+SIM-0078 Bumper beam - thermal cycling,"max stress 133 MPa, max displacement 3.38 mm, safety factor 1.93, mesh elements 180018, result review required.",obsolete
+SIM-0079 Door hinge - torsional load,"max stress 140 MPa, max displacement 4.03 mm, safety factor 2.29, mesh elements 181749, result within target.",open
+SIM-0080 Seat rail - drop test,"max stress 147 MPa, max displacement 4.68 mm, safety factor 2.65, mesh elements 183480, result within target.",processed
+SIM-0081 Control unit cover - static load,"max stress 154 MPa, max displacement 0.58 mm, safety factor 3.01, mesh elements 185211, result within target.",obsolete
+SIM-0082 Cooling fan frame - modal analysis,"max stress 161 MPa, max displacement 1.23 mm, safety factor 3.37, mesh elements 186942, result within target.",open
+SIM-0083 Dashboard carrier - thermal expansion,"max stress 168 MPa, max displacement 1.88 mm, safety factor 3.73, mesh elements 188673, result within target.",processed
+SIM-0084 Sensor mount - vibration fatigue,"max stress 175 MPa, max displacement 2.53 mm, safety factor 4.09, mesh elements 190404, result within target.",obsolete
+SIM-0085 Lamp module housing - impact load,"max stress 182 MPa, max displacement 3.18 mm, safety factor 1.05, mesh elements 192135, result review required.",open
+SIM-0086 Mirror support - mounting preload,"max stress 189 MPa, max displacement 3.83 mm, safety factor 1.41, mesh elements 193866, result review required.",processed
+SIM-0087 Cable guide - random vibration,"max stress 196 MPa, max displacement 4.48 mm, safety factor 1.77, mesh elements 195597, result review required.",obsolete
+SIM-0088 Thermal shield - thermal cycling,"max stress 203 MPa, max displacement 0.38 mm, safety factor 2.13, mesh elements 197328, result within target.",open
+SIM-0089 Pedal bracket - torsional load,"max stress 210 MPa, max displacement 1.03 mm, safety factor 2.49, mesh elements 199059, result review required.",processed
+SIM-0090 Connector holder - drop test,"max stress 217 MPa, max displacement 1.68 mm, safety factor 2.85, mesh elements 200790, result review required.",obsolete
+SIM-0091 Headlamp bracket - static load,"max stress 224 MPa, max displacement 2.33 mm, safety factor 3.21, mesh elements 202521, result review required.",open
+SIM-0092 Battery housing - modal analysis,"max stress 231 MPa, max displacement 2.98 mm, safety factor 3.57, mesh elements 204252, result review required.",processed
+SIM-0093 Bumper beam - thermal expansion,"max stress 238 MPa, max displacement 3.63 mm, safety factor 3.93, mesh elements 205983, result review required.",obsolete
+SIM-0094 Door hinge - vibration fatigue,"max stress 245 MPa, max displacement 4.28 mm, safety factor 4.29, mesh elements 207714, result review required.",open
+SIM-0095 Seat rail - impact load,"max stress 87 MPa, max displacement 0.18 mm, safety factor 1.25, mesh elements 209445, result review required.",processed
+SIM-0096 Control unit cover - mounting preload,"max stress 94 MPa, max displacement 0.83 mm, safety factor 1.61, mesh elements 211176, result review required.",obsolete
+SIM-0097 Cooling fan frame - random vibration,"max stress 101 MPa, max displacement 1.48 mm, safety factor 1.97, mesh elements 212907, result review required.",open
+SIM-0098 Dashboard carrier - thermal cycling,"max stress 108 MPa, max displacement 2.13 mm, safety factor 2.33, mesh elements 214638, result within target.",processed
+SIM-0099 Sensor mount - torsional load,"max stress 115 MPa, max displacement 2.78 mm, safety factor 2.69, mesh elements 216369, result within target.",obsolete
+SIM-0100 Lamp module housing - drop test,"max stress 122 MPa, max displacement 3.43 mm, safety factor 3.05, mesh elements 218100, result within target.",open
+SIM-0101 Mirror support - static load,"max stress 129 MPa, max displacement 4.08 mm, safety factor 3.41, mesh elements 219831, result within target.",processed
+SIM-0102 Cable guide - modal analysis,"max stress 136 MPa, max displacement 4.73 mm, safety factor 3.77, mesh elements 221562, result within target.",obsolete
+SIM-0103 Thermal shield - thermal expansion,"max stress 143 MPa, max displacement 0.63 mm, safety factor 4.13, mesh elements 223293, result within target.",open
+SIM-0104 Pedal bracket - vibration fatigue,"max stress 150 MPa, max displacement 1.28 mm, safety factor 1.09, mesh elements 45024, result review required.",processed
+SIM-0105 Connector holder - impact load,"max stress 157 MPa, max displacement 1.93 mm, safety factor 1.45, mesh elements 46755, result review required.",obsolete
+SIM-0106 Headlamp bracket - mounting preload,"max stress 164 MPa, max displacement 2.58 mm, safety factor 1.81, mesh elements 48486, result review required.",open
+SIM-0107 Battery housing - random vibration,"max stress 171 MPa, max displacement 3.23 mm, safety factor 2.17, mesh elements 50217, result within target.",processed
+SIM-0108 Bumper beam - thermal cycling,"max stress 178 MPa, max displacement 3.88 mm, safety factor 2.53, mesh elements 51948, result within target.",obsolete
+SIM-0109 Door hinge - torsional load,"max stress 185 MPa, max displacement 4.53 mm, safety factor 2.89, mesh elements 53679, result within target.",open
+SIM-0110 Seat rail - drop test,"max stress 192 MPa, max displacement 0.43 mm, safety factor 3.25, mesh elements 55410, result within target.",processed
+SIM-0111 Control unit cover - static load,"max stress 199 MPa, max displacement 1.08 mm, safety factor 3.61, mesh elements 57141, result within target.",obsolete
+SIM-0112 Cooling fan frame - modal analysis,"max stress 206 MPa, max displacement 1.73 mm, safety factor 3.97, mesh elements 58872, result within target.",open
+SIM-0113 Dashboard carrier - thermal expansion,"max stress 213 MPa, max displacement 2.38 mm, safety factor 4.33, mesh elements 60603, result review required.",processed
+SIM-0114 Sensor mount - vibration fatigue,"max stress 220 MPa, max displacement 3.03 mm, safety factor 1.29, mesh elements 62334, result review required.",obsolete
+SIM-0115 Lamp module housing - impact load,"max stress 227 MPa, max displacement 3.68 mm, safety factor 1.65, mesh elements 64065, result review required.",open
+SIM-0116 Mirror support - mounting preload,"max stress 234 MPa, max displacement 4.33 mm, safety factor 2.01, mesh elements 65796, result review required.",processed
+SIM-0117 Cable guide - random vibration,"max stress 241 MPa, max displacement 0.23 mm, safety factor 2.37, mesh elements 67527, result review required.",obsolete
+SIM-0118 Thermal shield - thermal cycling,"max stress 83 MPa, max displacement 0.88 mm, safety factor 2.73, mesh elements 69258, result within target.",open
+SIM-0119 Pedal bracket - torsional load,"max stress 90 MPa, max displacement 1.53 mm, safety factor 3.09, mesh elements 70989, result within target.",processed
+SIM-0120 Connector holder - drop test,"max stress 97 MPa, max displacement 2.18 mm, safety factor 3.45, mesh elements 72720, result within target.",obsolete
