@@ -33,6 +33,28 @@ def build_requirement_response(requirement: dict) -> RequirementResponse:
     )
 
 
+def get_status_counts() -> dict[str, int]:
+    status_rows = execute_query(
+        """
+        SELECT status, COUNT(*) AS count
+        FROM app.requirements
+        GROUP BY status
+        """,
+        fetch_all=True
+    )
+    if status_rows is None:
+        status_rows = []
+
+    status_counts = {
+        "open": 0,
+        "processed": 0,
+        "obsolete": 0
+    }
+    for row in status_rows:
+        status_counts[row["status"]] = row["count"]
+    return status_counts
+
+
 # Returns paginated requirements with status counts.
 @router.get(
     "",
@@ -40,8 +62,8 @@ def build_requirement_response(requirement: dict) -> RequirementResponse:
     responses={500: {"model": ErrorResponse}}
 )
 def get_requirements(
-    page: int = Query(1, ge=1),
-    limit: int = Query(10, ge=1, le=50)
+    page: int = Query(1, ge=1, description="Page number to fetch"),
+    limit: int = Query(10, ge=1, le=10000, description="Number of records per page")
 ):
     try:
         total_row = execute_query(
@@ -50,23 +72,8 @@ def get_requirements(
         )
         total = total_row["total"] if total_row else 0
         total_pages = max(1, ceil(total / limit))
+        page = min(page, total_pages)
         offset = (page - 1) * limit
-
-        status_rows = execute_query(
-            """
-            SELECT status, COUNT(*) AS count
-            FROM app.requirements
-            GROUP BY status
-            """,
-            fetch_all=True
-        )
-        status_counts = {
-            "open": 0,
-            "processed": 0,
-            "obsolete": 0
-        }
-        for row in status_rows:
-            status_counts[row["status"]] = row["count"]
 
         requirements = execute_query(
             f"""
@@ -89,11 +96,55 @@ def get_requirements(
             page=page,
             limit=limit,
             total_pages=total_pages,
-            status_counts=status_counts
+            status_counts=get_status_counts()
         )
     
     except Exception as e:
         print(f"Get requirements error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to fetch requirements"
+        )
+
+
+# Returns every requirement only when the frontend explicitly selects "All".
+@router.get(
+    "/all",
+    response_model=RequirementsList,
+    responses={500: {"model": ErrorResponse}}
+)
+def get_all_requirements():
+    try:
+        total_row = execute_query(
+            "SELECT COUNT(*) AS total FROM app.requirements",
+            fetch_one=True
+        )
+        total = total_row["total"] if total_row else 0
+
+        requirements = execute_query(
+            f"""
+            SELECT
+                {REQUIREMENT_FIELDS_SQL}
+            FROM app.requirements
+            ORDER BY created_at DESC
+            """,
+            fetch_all=True
+        )
+
+        if requirements is None:
+            requirements = []
+
+        return RequirementsList(
+            requirements=[build_requirement_response(req) for req in requirements],
+            total=total,
+            page=1,
+            limit=total,
+            total_pages=1,
+            status_counts=get_status_counts()
+        )
+
+    except Exception as e:
+        print(f"Get all requirements error: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to fetch requirements"

@@ -194,6 +194,7 @@ function RequirementsPage({ user, onLogout }) {
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState({
     title: "",
@@ -206,30 +207,35 @@ function RequirementsPage({ user, onLogout }) {
     return pagination.statusCounts;
   }, [pagination.statusCounts]);
 
-  // Loads requirements with backend pagination and client-side fallback.
+  const displayName = user?.username || user?.email?.split("@")[0] || "User";
+  const isShowingAll = pagination.limit === "all";
+
+  // Loads one backend page, or all rows only when the user selects "All".
   async function loadRequirements(nextPage = pagination.page, nextLimit = pagination.limit) {
     setError("");
     setLoading(true);
 
     try {
-      const data = await getRequirements(nextPage, nextLimit);
-      const hasServerPagination = typeof data.page === "number";
-      const allRequirements = data.requirements || [];
-      const visibleRequirements = hasServerPagination
-        ? allRequirements
-        : allRequirements.slice((nextPage - 1) * nextLimit, nextPage * nextLimit);
-      const total = data.total ?? allRequirements.length;
-      const statusCounts = data.status_counts ?? allRequirements.reduce(
+      const requestLimit = nextLimit === "all"
+        ? Math.max(pagination.total, requirements.length, 1)
+        : nextLimit;
+      const data = await getRequirements(nextPage, requestLimit);
+      const pageRequirements = data.requirements || [];
+      const total = data.total ?? pageRequirements.length;
+      const resolvedLimit = nextLimit === "all" ? "all" : data.limit ?? nextLimit;
+      const statusCounts = data.status_counts ?? pageRequirements.reduce(
         (acc, item) => ({ ...acc, [item.status]: (acc[item.status] || 0) + 1 }),
         { open: 0, processed: 0, obsolete: 0 }
       );
 
-      setRequirements(visibleRequirements);
+      setRequirements(pageRequirements);
       setPagination({
         page: data.page ?? nextPage,
-        limit: data.limit ?? nextLimit,
+        limit: resolvedLimit,
         total,
-        totalPages: data.total_pages ?? Math.max(1, Math.ceil(total / nextLimit)),
+        totalPages: nextLimit === "all"
+          ? 1
+          : data.total_pages ?? Math.max(1, Math.ceil(total / requestLimit)),
         statusCounts
       });
     } catch (err) {
@@ -258,6 +264,7 @@ function RequirementsPage({ user, onLogout }) {
       });
       await loadRequirements(1, pagination.limit);
       setForm({ title: "", description: "", status: "open" });
+      setIsModalOpen(false);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -276,60 +283,28 @@ function RequirementsPage({ user, onLogout }) {
     <main className="app-page">
       <header className="topbar">
         <div>
-          <p className="eyebrow">Requirements</p>
           <h1>Requirements Management Portal</h1>
         </div>
         <div className="user-actions">
-          <span>{user?.email}</span>
-          <button className="secondary" onClick={logout}>Logout</button>
+          <span>Welcome {displayName}</span>
+          <button className="secondary logout-button" onClick={logout}>Logout</button>
         </div>
       </header>
-
-      <section className={`summary ${loading ? "is-loading" : ""}`} aria-label="Requirement status counts">
-        <div><strong>{pagination.total}</strong><span>Total</span></div>
-        <div><strong>{totals.open}</strong><span>Open</span></div>
-        <div><strong>{totals.processed}</strong><span>Processed</span></div>
-        <div><strong>{totals.obsolete}</strong><span>Obsolete</span></div>
-      </section>
-
       {error && <div className="notice error">{error}</div>}
 
       <section className="content-grid">
-        <form className="form-panel" onSubmit={handleSubmit}>
-          <div className="panel-heading form-heading">
-            <h2>Add Requirement</h2>
-          </div>
-          <Field
-            label="Title"
-            type="text"
-            maxLength="255"
-            required
-            value={form.title}
-            onChange={(event) => setForm({ ...form, title: event.target.value })}
-          />
-          <label className="field">
-            <span>Description</span>
-            <textarea
-              rows="5"
-              value={form.description}
-              onChange={(event) => setForm({ ...form, description: event.target.value })}
-            />
-          </label>
-          <label className="field">
-            <span>Status</span>
-            <select
-              value={form.status}
-              onChange={(event) => setForm({ ...form, status: event.target.value })}
-            >
-              <option value="open">Open</option>
-              <option value="processed">Processed</option>
-              <option value="obsolete">Obsolete</option>
-            </select>
-          </label>
-          <button className="primary" disabled={saving}>
-            {saving ? "Adding..." : "Add Requirement"}
+        <aside className="side-panel">
+          <button className="compose-button" type="button" onClick={() => setIsModalOpen(true)}>
+            <span aria-hidden="true">+</span>
+            Add Requirement
           </button>
-        </form>
+          <section className={`summary ${loading ? "is-loading" : ""}`} aria-label="Requirement status counts">
+            <div><span>Total</span><strong>{pagination.total}</strong></div>
+            <div><span>Open</span><strong>{totals.open}</strong></div>
+            <div><span>Processed</span><strong>{totals.processed}</strong></div>
+            <div><span>Obsolete</span><strong>{totals.obsolete}</strong></div>
+          </section>
+        </aside>
 
         <section className="table-panel">
           <div className="panel-heading">
@@ -342,7 +317,12 @@ function RequirementsPage({ user, onLogout }) {
               aria-label="Refresh requirements"
               title="Refresh requirements"
             >
-              <span aria-hidden="true">R</span>
+              <svg className="refresh-icon" aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20 6v5h-5" />
+                <path d="M4 18v-5h5" />
+                <path d="M18.8 9A7 7 0 0 0 6.7 6.7L4 9" />
+                <path d="M5.2 15A7 7 0 0 0 17.3 17.3L20 15" />
+              </svg>
             </button>
           </div>
 
@@ -388,18 +368,18 @@ function RequirementsPage({ user, onLogout }) {
                 className="pager-button"
                 type="button"
                 onClick={() => loadRequirements(pagination.page - 1, pagination.limit)}
-                disabled={pagination.page <= 1}
+                disabled={isShowingAll || pagination.page <= 1}
               >
                 Previous
               </button>
               <span>
-                Page {pagination.page} of {pagination.totalPages}
+                {isShowingAll ? `Showing all ${pagination.total}` : `Page ${pagination.page} of ${pagination.totalPages}`}
               </span>
               <button
                 className="pager-button"
                 type="button"
                 onClick={() => loadRequirements(pagination.page + 1, pagination.limit)}
-                disabled={pagination.page >= pagination.totalPages}
+                disabled={isShowingAll || pagination.page >= pagination.totalPages}
               >
                 Next
               </button>
@@ -407,17 +387,76 @@ function RequirementsPage({ user, onLogout }) {
                 <span>Rows</span>
                 <select
                   value={pagination.limit}
-                  onChange={(event) => loadRequirements(1, Number(event.target.value))}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    loadRequirements(1, value === "all" ? "all" : Number(value));
+                  }}
                 >
                   <option value="10">10</option>
                   <option value="20">20</option>
                   <option value="50">50</option>
+                  <option value="all">All</option>
                 </select>
               </label>
             </div>
           )}
         </section>
       </section>
+      {isModalOpen && (
+        <div className="modal-backdrop" role="presentation" onMouseDown={() => setIsModalOpen(false)}>
+          <section
+            className="modal-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="add-requirement-title"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <div className="modal-heading">
+              <h2 id="add-requirement-title">Add Requirement</h2>
+              <button
+                className="close-button"
+                type="button"
+                aria-label="Close add requirement form"
+                onClick={() => setIsModalOpen(false)}
+              >
+                x
+              </button>
+            </div>
+            <form className="modal-form" onSubmit={handleSubmit}>
+              <Field
+                label="Title"
+                type="text"
+                maxLength="255"
+                required
+                value={form.title}
+                onChange={(event) => setForm({ ...form, title: event.target.value })}
+              />
+              <label className="field">
+                <span>Description</span>
+                <textarea
+                  rows="5"
+                  value={form.description}
+                  onChange={(event) => setForm({ ...form, description: event.target.value })}
+                />
+              </label>
+              <label className="field">
+                <span>Status</span>
+                <select
+                  value={form.status}
+                  onChange={(event) => setForm({ ...form, status: event.target.value })}
+                >
+                  <option value="open">Open</option>
+                  <option value="processed">Processed</option>
+                  <option value="obsolete">Obsolete</option>
+                </select>
+              </label>
+              <button className="primary" disabled={saving}>
+                {saving ? "Adding..." : "Add Requirement"}
+              </button>
+            </form>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

@@ -10,12 +10,12 @@ Full-stack web application built for the Intern Task - Full Stack Exercise. The 
 - Authentication state stored in `localStorage`
 - Requirements table with status badges
 - Add requirement form
-- Pagination for larger requirement lists
 - Loading and error states
 - PostgreSQL database with separated `auth` and `app` schemas
 - bcrypt password hashing
 - Parameterized SQL queries
 - Pydantic and database-level status validation
+- Pagination for larger requirement lists
 
 ## Tech Stack
 
