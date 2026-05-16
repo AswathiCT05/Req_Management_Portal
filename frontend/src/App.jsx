@@ -78,6 +78,8 @@ function RequirementsPage({ user, onLogout }) {
 
   const displayName = user?.username || user?.email?.split("@")[0] || "User";
   const isShowingAll = pagination.limit === "all";
+  const hasLoadedRequirements = requirements.length > 0 || pagination.total > 0;
+  const showInitialLoading = loading && !hasLoadedRequirements;
 
   // Loads one backend page, or all rows only when the user selects "All".
   async function loadRequirements(nextPage = pagination.page, nextLimit = pagination.limit) {
@@ -201,7 +203,7 @@ function RequirementsPage({ user, onLogout }) {
             </button>
           </div>
 
-          {loading ? (
+          {showInitialLoading ? (
             <div className="loading-state" aria-live="polite">
               <div className="loader-ring" aria-hidden="true" />
               <strong>Loading requirements</strong>
@@ -221,7 +223,17 @@ function RequirementsPage({ user, onLogout }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {requirements.map((item) => (
+                  {loading && (
+                    <tr className="refresh-row">
+                      <td colSpan="4">
+                        <div className="table-refreshing" aria-live="polite">
+                          <div className="loader-ring" aria-hidden="true" />
+                          <span>Refreshing</span>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                  {!loading && requirements.map((item) => (
                     <tr key={item.id}>
                       <td>{item.title}</td>
                       <td>{item.description || "-"}</td>
@@ -237,7 +249,7 @@ function RequirementsPage({ user, onLogout }) {
               </table>
             </div>
           )}
-          {!loading && pagination.total > 0 && (
+          {pagination.total > 0 && (
             <div className="pagination-bar" aria-label="Requirements pagination">
               <button
                 className="pager-button"

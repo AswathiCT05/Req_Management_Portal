@@ -486,6 +486,31 @@ button:disabled {
   overflow: auto;
 }
 
+.table-refreshing {
+  align-items: center;
+  color: #334149;
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.refresh-row td {
+  background: #f7faf9;
+  padding: 10px;
+  text-align: center;
+}
+
+.table-refreshing .loader-ring {
+  border-width: 3px;
+  height: 18px;
+  width: 18px;
+}
+
+.table-refreshing span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .pagination-bar {
   align-items: center;
   border-top: 1px solid #e7e7e7;
