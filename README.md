@@ -1,28 +1,38 @@
 # Requirements Management Portal
 
-Full-stack web application built for the Intern Task - Full Stack Exercise. The app provides user authentication and a protected requirements management page where logged-in users can view existing requirements and add new ones.
+Full-stack requirements management app built with React, FastAPI, and PostgreSQL. Users can sign up, log in, and manage requirement records from a protected frontend workspace.
 
 ## Features
 
-- Login page for existing users
-- Signup page for new users
-- Protected `/requirements` page
-- Authentication state stored in `localStorage`
+- User signup and login
+- JWT generation after authentication
+- Auth session stored in `localStorage`
+- Protected frontend `/requirements` route
 - Requirements table with status badges
-- Add requirement form
+- Add Requirement modal
+- Refresh action for the requirements table
+- Status summary counts for total, open, processed, and obsolete requirements
 - Loading and error states
-- PostgreSQL database with separated `auth` and `app` schemas
+- PostgreSQL schemas separated into `auth` and `app`
 - bcrypt password hashing
-- Parameterized SQL queries
-- Pydantic and database-level status validation
-- Pagination for larger requirement lists
+- Parameterized SQL queries with pg8000
+- Pydantic request validation
+- Database-level status validation with a `CHECK` constraint 
+
+## feature added as extra 
+- Pagination with `10`, `20`, `50`, and `All` page-size options
+
+## future improvement suggestions:
+- API level filtering of requirements based on 'Total', 'Open', 'Processed' and 'obsolete'.
+- DELETE and PATCH APIs for requirements.
 
 ## Tech Stack
 
 - Frontend: React, Vite, react-router-dom
-- Backend: FastAPI, Python
+- Backend: FastAPI, Python, Uvicorn
 - Database: PostgreSQL
-- Security: bcrypt password hashing, JWT tokens
+- Security: bcrypt, JWT
+- Database driver: pg8000
 
 ## Project Structure
 
@@ -43,8 +53,7 @@ repo/
 |   |   `-- services/
 |   |       `-- security.py
 |   |-- main.py
-|   |-- requirements.txt
-|   `-- README.md
+|   `-- requirements.txt
 |-- frontend/
 |   |-- src/
 |   |   |-- App.jsx
@@ -52,71 +61,77 @@ repo/
 |   |   |-- main.jsx
 |   |   `-- styles.css
 |   |-- index.html
-|   |-- package.json
-|   `-- serve.py
-|-- schema.sql
+|   `-- package.json
 |-- mock_requirements.csv
+|-- schema.sql
 `-- README.md
 ```
 
-## Database Design
+## Database
 
-The database uses PostgreSQL with two fully separate schemas:
+The PostgreSQL database uses two schemas:
 
-- `auth` stores user authentication data.
-- `app` stores requirement data.
+- `auth`: stores user accounts
+- `app`: stores requirements
 
-The schemas are independent. There are no foreign keys or relationships between `auth.users` and `app.requirements`.
-
-Tables created by `schema.sql`:
+`schema.sql` creates:
 
 - `auth.users`
 - `app.requirements`
 
-Requirement status values are enforced in the database with a `CHECK` constraint:
+Requirement statuses are constrained at the database level:
 
 ```sql
-status IN ('open', 'processed', 'obsolete')
+CHECK (status IN ('open', 'processed', 'obsolete'))
 ```
+
+This means PostgreSQL rejects invalid status values even if data is inserted outside the API.
 
 ## API Endpoints
 
 Authentication:
 
-- `POST /auth/signup`
-- `POST /auth/login`
+```text
+POST /auth/signup
+POST /auth/login
+```
 
 Requirements:
 
-- `GET /requirements`
-- `POST /requirements`
+```text
+GET    /requirements?page=1&limit=10
+GET    /requirements/all
+POST   /requirements
+```
 
-Additional implemented endpoints:
+The main requirements list endpoint returns pagination metadata:
 
-- `PATCH /requirements/{requirement_id}`
-- `DELETE /requirements/{requirement_id}`
+```json
+{
+  "requirements": [],
+  "total": 121,
+  "page": 1,
+  "limit": 10,
+  "total_pages": 13,
+  "status_counts": {
+    "open": 40,
+    "processed": 40,
+    "obsolete": 41
+  }
+}
+```
 
-## Important Rules Covered
-
-- No plain-text passwords: passwords are hashed with bcrypt before storage.
-- No SQL string concatenation for user input: SQL values are passed through parameterized queries.
-- Strict schema separation: users are stored in `auth.users`, requirements are stored in `app.requirements`.
-- Proper validation: Pydantic validates API input, including allowed status values.
-- Proper error handling: duplicate email, invalid login, invalid status, missing records, and server errors return clear API responses.
+The frontend defaults to `limit=10`. The `All` dropdown option requests all rows in one response by using the current total as the limit.
 
 ## Prerequisites
 
-Install these before running the project:
-
-- Python 3.10 or later
-- Node.js 18 or later
+- Python 3.10+
+- Node.js 18+
 - PostgreSQL
 
 ## Database Setup
 
-Open PowerShell or a terminal from the project root.
-
-Create the database:
+From the project root, create a database:
 
 ```powershell
 psql -U postgres
@@ -133,6 +148,18 @@ Load the schema:
 
 ```powershell
 psql -U postgres -d interntask_db -f schema.sql
+```
+
+Optional: load the mock requirements:
+
+```powershell
+psql -U postgres -d interntask_db
+```
+
+Inside the PostgreSQL prompt, run this from the project root path:
+
+```sql
+\copy app.requirements(title, description, status) FROM 'mock_requirements.csv' WITH (FORMAT csv, HEADER true);
 ```
 
 ## Backend Setup
@@ -172,22 +199,16 @@ DEBUG=True
 Run the backend:
 
 ```powershell
-python main.py
-```
-
-Or run it with uvicorn:
-
-```powershell
 .\venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Backend URL:
+Backend:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-API documentation:
+API docs:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -195,27 +216,15 @@ http://127.0.0.1:8000/docs
 
 ## Frontend Setup
 
-Open a second terminal from the project root.
-
-Go to the frontend folder:
+Open a second terminal from the project root:
 
 ```powershell
 cd frontend
-```
-
-Install dependencies:
-
-```powershell
 npm install
-```
-
-Run the frontend development server:
-
-```powershell
 npm run dev
 ```
 
-Frontend URL:
+Frontend:
 
 ```text
 http://localhost:5173
@@ -227,45 +236,48 @@ Optional `frontend/.env`:
 VITE_API_URL=http://localhost:8000
 ```
 
-## Running The Full App
+## Running The App
 
 1. Start PostgreSQL.
-2. Run the backend on `http://127.0.0.1:8000`.
-3. Run the frontend on `http://localhost:5173`.
-4. Open `/signup` and create a new account.
-5. Log in from `/login`.
-6. After login, the app redirects to `/requirements`.
+2. Load `schema.sql`.
+3. Start the backend on `http://127.0.0.1:8000`.
+4. Start the frontend on `http://localhost:5173`.
+5. Open `/signup` and create an account.
+6. Log in from `/login`.
+7. Use the `/requirements` workspace to view and add requirements.
 
 ## Frontend Routes
 
-- `/login`: login page
-- `/signup`: account creation page
-- `/requirements`: protected requirements page
+```text
+/login
+/signup
+/requirements
+```
 
-If a user is not logged in and tries to open `/requirements`, the app redirects to `/login`.
+Unauthenticated users are redirected to `/login` before accessing `/requirements`.
 
-## Validation Details
+## Validation
 
-Signup validation:
+Signup:
 
 - Email must be valid.
-- Username must be at least 3 characters.
+- Username must be 3 to 255 characters.
 - Password must be at least 6 characters.
 
-Requirement validation:
+Requirement:
 
-- Title is required.
+- Title is required and max 255 characters.
 - Description is optional.
-- Status must be one of `open`, `processed`, or `obsolete`.
+- Status must be `open`, `processed`, or `obsolete`.
 
-Status validation exists in both places:
+Status validation is enforced in two places:
 
-- Backend API using Pydantic enum validation
-- PostgreSQL using a `CHECK` constraint
+- API level: Pydantic `StatusEnum`
+- Database level: PostgreSQL `CHECK` constraint
 
-## Smoke Test
+## Smoke Tests
 
-With the backend running:
+Health check:
 
 ```powershell
 curl http://127.0.0.1:8000/health
@@ -280,18 +292,24 @@ Expected response:
 }
 ```
 
-## Completion Status
+Paginated requirements:
 
-All required parts from the task description are implemented:
+```powershell
+curl "http://127.0.0.1:8000/requirements?page=1&limit=10"
+```
 
-- Backend authentication APIs
-- Backend requirements APIs
-- PostgreSQL schema separation
-- bcrypt password hashing
-- Parameterized SQL queries
-- Pydantic and database validation
-- React login/signup/requirements pages
-- Protected route behavior
-- localStorage authentication flow
-- Loading and error handling
+## Build
 
+Frontend production build:
+
+```powershell
+cd frontend
+npm run build
+```
+
+## Notes
+
+- Requirement SQL uses parameterized values.
+- Passwords are never stored as plain text.
+- The frontend stores the returned auth token and user details in `localStorage`.
+- Restart the backend after changing backend route or model files.

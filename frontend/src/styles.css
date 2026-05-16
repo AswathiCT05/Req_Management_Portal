@@ -212,19 +212,21 @@ button:disabled {
 }
 
 .logout-button {
-  box-shadow: 0 4px 0 #555555;
-  min-height: 38px;
-  padding: 0 12px;
+  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.14);
+  color: #991b1b;
+  font-size: 15px;
+  min-height: 35px;
+  padding: 0 10px;
 }
 
 .logout-button:hover:not(:disabled) {
-  box-shadow: 0 3px 0 #555555;
-  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(17, 24, 39, 0.16);
+  transform: none;
 }
 
 .logout-button:active:not(:disabled) {
-  box-shadow: 0 1px 0 #555555;
-  transform: translateY(3px);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.12);
+  transform: none;
 }
 
 .icon-button {
@@ -321,7 +323,7 @@ button:disabled {
   display: flex;
   gap: 14px;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .topbar h1 {
@@ -388,6 +390,7 @@ button:disabled {
   display: grid;
   gap: 16px;
   grid-template-columns: 210px minmax(0, 1fr);
+  margin-top: 10px;
 }
 
 .side-panel,
