@@ -180,7 +180,7 @@ Inside the PostgreSQL prompt, run this from the project root path:
 
 ## Backend Setup
 
-Use Python 3.14 or above for the backend.
+Use Python 3.14 or above for the backend ( or requirements dependancy issues might occur when installing).
 
 Go to the backend folder:
 
@@ -200,6 +200,8 @@ Install dependencies:
 ```powershell
 pip install -r requirements.txt
 ```
+(Try installing newer Python version , if the above requirements installation has some issues and throws error )
+.............................
 
 Create `backend/.env`:
 
