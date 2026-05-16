@@ -153,6 +153,12 @@ psql -U postgres -d interntask_db -f schema.sql
 Optional: load the mock requirements:
 
 ```powershell
+psql -U postgres -d interntask_db -c "\copy app.requirements(title, description, status) FROM 'mock_requirements.csv' WITH (FORMAT csv, HEADER true);"
+```
+
+Or open PostgreSQL manually:
+
+```powershell
 psql -U postgres -d interntask_db
 ```
 
