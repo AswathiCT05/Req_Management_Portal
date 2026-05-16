@@ -131,6 +131,16 @@ The frontend defaults to `limit=10`. The `All` dropdown option requests all rows
 
 ## Database Setup
 
+Install PostgreSQL first. During installation, remember the password you set for the `postgres` user.
+
+On Windows, add the PostgreSQL `bin` folder to the system `Path` environment variable so `psql` works from PowerShell. The path usually looks like:
+
+```text
+C:\Program Files\PostgreSQL\16\bin
+```
+
+If you installed a different PostgreSQL version, replace `16` with your installed version number. After updating `Path`, close and reopen PowerShell.
+
 From the project root, create a database:
 
 ```powershell
