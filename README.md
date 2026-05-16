@@ -125,8 +125,8 @@ The frontend defaults to `limit=10`. The `All` dropdown option requests all rows
 
 ## Prerequisites
 
-- Python 3.10+
-- Node.js 18+
+- Python 3.14 or above
+- Node.js 22 or above
 - PostgreSQL
 
 ## Database Setup
@@ -169,6 +169,8 @@ Inside the PostgreSQL prompt, run this from the project root path:
 ```
 
 ## Backend Setup
+
+Use Python 3.14 or above for the backend.
 
 Go to the backend folder:
 
@@ -221,6 +223,8 @@ http://127.0.0.1:8000/docs
 ```
 
 ## Frontend Setup
+
+Use Node.js 22 or above for the frontend.
 
 Open a second terminal from the project root:
 
